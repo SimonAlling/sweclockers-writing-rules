@@ -1,0 +1,56 @@
+{
+  "name": "sweclockers-writing-rules",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Used in Better SweClockers.",
+  "keywords": [
+    "SweClockers",
+    "highlight",
+    "mistakes",
+    "grammar",
+    "typography",
+    "proof",
+    "NBSP",
+    "non-breaking",
+    "space",
+    "hyphen"
+  ],
+  "author": {
+    "name": "Simon Alling",
+    "email": "alling.simon@gmail.com",
+    "url": "https://simonalling.se"
+  },
+  "license": "MIT",
+  "main": "index",
+  "types": "index",
+  "files": [
+    "index.ts"
+  ],
+  "scripts": {
+    "lint": "tslint --project .",
+    "test": "jest",
+    "verify": "npm run lint && npm run test"
+  },
+  "sideEffects": false,
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "/__tests__/.+\\.test\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json",
+      "node"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.12",
+    "highlight-mistakes": "^0.1.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.15.3",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  }
+}
