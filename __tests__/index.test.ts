@@ -171,6 +171,12 @@ it("proofreads examples correctly", () => {
   ).toMatchInlineSnapshot(
     `"en volym på 5<mis hårt mellanslag> </mis>m<mis tecknet ³ istället för en upphöjd trea><sup class=\\"bbSup\\">3</sup></mis>"`
   );
+  expect(proofread(`med PCI Express-anslutning`)).toMatchInlineSnapshot(
+    `"med PCI<mis hårt mellanslag> </mis>Express-anslutning"`
+  );
+  expect(proofread(`med PCI Express 3.0`)).toMatchInlineSnapshot(
+    `"med PCI<mis hårt mellanslag> </mis>Express<mis hårt mellanslag> </mis>3.0"`
+  );
 });
 
 it("highlights examples correctly", () => {

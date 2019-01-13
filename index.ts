@@ -23,6 +23,7 @@ export const PATTERNS_MISTAKE_NB_SPACE = [
     / \d+\.\d+/, // USB 3.0, HDMI 2.1 etc
     /USB Type/,
     /4K UHD/,
+    /PCI Express/,
     /Core i\d/, // Intel CPUs
     /\d \d{4}/, // AMD CPUs (7 2700X)
     /Geforce (?:G|R)TX\-/, // Geforce GTX-serien
