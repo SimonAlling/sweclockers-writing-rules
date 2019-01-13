@@ -30,7 +30,6 @@ export const PATTERNS_MISTAKE_NB_SPACE = [
     /(?:G|R)TX \d+(?: Ti)?/, // Nvidia GPUs
     /Vega \d+/, // AMD GPUs
     /R\d \d+/, // AMD GPUs
-    / × /, // resolutions etc
     /DVI(?:[-‑][DI])? DL\b/,
     /[A-Z][a-z]+ \d{1,3}\b/, // Battlefield 1, Far Cry 5
     // *** BE CAREFUL! Read above. ***
@@ -80,12 +79,13 @@ export const PATTERNS_MISTAKE_TIMES = [
 ];
 
 // Non-breaking space, non-breaking hyphen, en dash:
-export const PATTERN_VERIFY = /&nbsp;|‑|–|×/g;
+export const PATTERN_DOPPELGANGERS = /&nbsp;|‑|–|×/g;
 
-export const MISTAKES = [
-    { substring: " ", contexts: PATTERNS_MISTAKE_NB_SPACE, info: "hårt mellanslag" },
-    { substring: " ", contexts: PATTERNS_MISTAKE_NB_SPACE_POST, info: "hårt mellanslag" },
-    { substring: "-", contexts: PATTERNS_MISTAKE_NB_HYPHEN, info: "hårt bindestreck" },
-    { substring: "-", contexts: PATTERNS_MISTAKE_EN_DASH, info: "tankstreck" },
-    { substring: "x", contexts: PATTERNS_MISTAKE_TIMES, info: "gångertecken" },
+export const RULES = [
+    { change: { from: " × ", to: "&nbsp;×&nbsp;" }, contexts: [ /\d( × )\d/ ], info: "hårda mellanslag" }, // resolutions etc
+    { change: { from: " ", to: "&nbsp;" }, contexts: PATTERNS_MISTAKE_NB_SPACE, info: "hårt mellanslag" },
+    { change: { from: " ", to: "&nbsp;" }, contexts: PATTERNS_MISTAKE_NB_SPACE_POST, info: "hårt mellanslag" },
+    { change: { from: "-", to: "‑" }, contexts: PATTERNS_MISTAKE_NB_HYPHEN, info: "hårt bindestreck" },
+    { change: { from: "-", to: "–" }, contexts: PATTERNS_MISTAKE_EN_DASH, info: "tankstreck" },
+    { change: { from: "x", to: "×" }, contexts: PATTERNS_MISTAKE_TIMES, info: "gångertecken" },
 ];
