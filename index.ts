@@ -88,4 +88,6 @@ export const RULES = [
     { change: { from: "-", to: "‑" }, contexts: PATTERNS_MISTAKE_NB_HYPHEN, info: "hårt bindestreck" },
     { change: { from: "-", to: "–" }, contexts: PATTERNS_MISTAKE_EN_DASH, info: "tankstreck" },
     { change: { from: "x", to: "×" }, contexts: PATTERNS_MISTAKE_TIMES, info: "gångertecken" },
+    { change: { from: `<sup class="bbSup">2</sup>`, to: "²" }, contexts: [ /<sup class="bbSup">2<\/sup>/ ], info: "tecknet ² istället för en upphöjd tvåa" },
+    { change: { from: `<sup class="bbSup">3</sup>`, to: "³" }, contexts: [ /<sup class="bbSup">3<\/sup>/ ], info: "tecknet ³ istället för en upphöjd trea" },
 ];

@@ -161,6 +161,16 @@ it("proofreads examples correctly", () => {
   expect(proofread(`2&nbsp;560&nbsp;×&nbsp;1&nbsp;440`)).toMatchInlineSnapshot(
     `"2<ver>&nbsp;</ver>560<ver>&nbsp;×&nbsp;</ver>1<ver>&nbsp;</ver>440"`
   );
+  expect(
+    proofread(`en yta på 32 mm<sup class="bbSup">2</sup>`)
+  ).toMatchInlineSnapshot(
+    `"en yta på 32<mis hårt mellanslag> </mis>mm<mis tecknet ² istället för en upphöjd tvåa><sup class=\\"bbSup\\">2</sup></mis>"`
+  );
+  expect(
+    proofread(`en volym på 5 m<sup class="bbSup">3</sup>`)
+  ).toMatchInlineSnapshot(
+    `"en volym på 5<mis hårt mellanslag> </mis>m<mis tecknet ³ istället för en upphöjd trea><sup class=\\"bbSup\\">3</sup></mis>"`
+  );
 });
 
 it("highlights examples correctly", () => {
