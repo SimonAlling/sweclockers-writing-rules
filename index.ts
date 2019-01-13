@@ -73,12 +73,19 @@ export const PATTERNS_MISTAKE_EN_DASH = [
     // *** BE CAREFUL! Read above. ***
 ];
 
+export const PATTERNS_MISTAKE_TIMES = [
+    // *** BE CAREFUL! Read above. ***
+    / x /,
+    // *** BE CAREFUL! Read above. ***
+];
+
 // Non-breaking space, non-breaking hyphen, en dash:
-export const PATTERN_VERIFY = /&nbsp;|‑|–/g;
+export const PATTERN_VERIFY = /&nbsp;|‑|–|×/g;
 
 export const MISTAKES = [
     { substring: " ", contexts: PATTERNS_MISTAKE_NB_SPACE, info: "hårt mellanslag" },
     { substring: " ", contexts: PATTERNS_MISTAKE_NB_SPACE_POST, info: "hårt mellanslag" },
     { substring: "-", contexts: PATTERNS_MISTAKE_NB_HYPHEN, info: "hårt bindestreck" },
     { substring: "-", contexts: PATTERNS_MISTAKE_EN_DASH, info: "tankstreck" },
+    { substring: "x", contexts: PATTERNS_MISTAKE_TIMES, info: "gångertecken" },
 ];

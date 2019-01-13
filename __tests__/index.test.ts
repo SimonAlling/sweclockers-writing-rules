@@ -49,20 +49,20 @@ it("highlights examples correctly", () => {
   ).toMatchInlineSnapshot(
     `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver>–</ver> RTX<mis hårt mellanslag> </mis>2080<mis hårt mellanslag> </mis>Ti eller Radeon VII för 4K-spelande"`
   );
-expect(
-  highlight(
-    `The Division 2 får systemkrav – RTX 2080&nbsp;Ti eller Radeon VII för 4K-spelande`
-  )
-).toMatchInlineSnapshot(
-  `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver>–</ver> RTX<mis hårt mellanslag> </mis>2080<ver>&nbsp;</ver>Ti eller Radeon VII för 4K-spelande"`
-);
+  expect(
+    highlight(
+      `The Division 2 får systemkrav – RTX 2080&nbsp;Ti eller Radeon VII för 4K-spelande`
+    )
+  ).toMatchInlineSnapshot(
+    `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver>–</ver> RTX<mis hårt mellanslag> </mis>2080<ver>&nbsp;</ver>Ti eller Radeon VII för 4K-spelande"`
+  );
   expect(highlight(`144 Hz IPS med Freesync på 27 tum`)).toMatchInlineSnapshot(
     `"144<mis hårt mellanslag> </mis>Hz IPS med Freesync på 27<mis hårt mellanslag> </mis>tum"`
   );
   expect(
     highlight(`10-bitars IPS-panel, upplösningen 2 560 × 1 440 pixlar, 144 Hz`)
   ).toMatchInlineSnapshot(
-    `"10-bitars IPS-panel, upplösningen 2<mis hårt mellanslag> </mis>560<mis hårt mellanslag> </mis>×<mis hårt mellanslag> </mis>1<mis hårt mellanslag> </mis>440 pixlar, 144<mis hårt mellanslag> </mis>Hz"`
+    `"10-bitars IPS-panel, upplösningen 2<mis hårt mellanslag> </mis>560<mis hårt mellanslag> </mis><ver>×</ver><mis hårt mellanslag> </mis>1<mis hårt mellanslag> </mis>440 pixlar, 144<mis hårt mellanslag> </mis>Hz"`
   );
   expect(highlight(`cirka 6 700 kronor`)).toMatchInlineSnapshot(
     `"cirka 6<mis hårt mellanslag> </mis>700<mis hårt mellanslag> </mis>kronor"`
@@ -156,5 +156,17 @@ expect(
     highlight(`Vi pratar Ryzen 3000-serien med AMD – Zen 2 och 7 nanometer`)
   ).toMatchInlineSnapshot(
     `"Vi pratar Ryzen<mis hårt mellanslag> </mis>3000-serien med AMD <ver>–</ver> Zen<mis hårt mellanslag> </mis>2 och 7<mis hårt mellanslag> </mis>nanometer"`
+  );
+  expect(highlight(`2 x Ethernet RJ45`)).toMatchInlineSnapshot(
+    `"2 <mis gångertecken>x</mis> Ethernet RJ45"`
+  );
+  expect(highlight(`2 × Ethernet RJ45`)).toMatchInlineSnapshot(
+    `"2<mis hårt mellanslag> </mis><ver>×</ver><mis hårt mellanslag> </mis>Ethernet RJ45"`
+  );
+  expect(highlight(`2 560 x 1 440`)).toMatchInlineSnapshot(
+    `"2<mis hårt mellanslag> </mis>560 <mis gångertecken>x</mis> 1<mis hårt mellanslag> </mis>440"`
+  );
+  expect(highlight(`2&nbsp;560 × 1&nbsp;440`)).toMatchInlineSnapshot(
+    `"2<ver>&nbsp;</ver>560<mis hårt mellanslag> </mis><ver>×</ver><mis hårt mellanslag> </mis>1<ver>&nbsp;</ver>440"`
   );
 });
