@@ -63,13 +63,17 @@ export const PATTERNS_MISTAKE_NB_HYPHEN = [
     /DDR\d-\d/, // DDR4-3200, LPDDR3-2133 etc
     /i\d-\d{4}/, // Intel CPUs
     /[A-Z][a-z]+-[A-Z]{1,2}\b/, // Haswell-E, Kaby Lake-X etc
+    /\d{4}-\d{2}-\d{2}/,
     // *** BE CAREFUL! Read above. ***
 ];
 
 export const PATTERNS_MISTAKE_EN_DASH = [
     // *** BE CAREFUL! Read above. ***
     / - /,
-    /\b\d+(?:,\d+)?-\d+(?:,\d+)?\b/, // intervals, e.g. 2-5; 1,5-2,0
+    /* The first group prevents hyphens in dates to be markes as mistakes.
+    We have to use a Unicode escape sequence there (\u002D = hyphen) because a
+    literal hyphen would be overwritten with an en dash for the verify phase. */
+    /(?:^|[^\d\u002D])\d{1,3}(?:,\d+)?(-)\d+(?:,\d+)?\b/, // intervals, e.g. 2-5; 1,5-2,0
     // *** BE CAREFUL! Read above. ***
 ];
 

@@ -179,6 +179,20 @@ it("proofreads examples correctly", () => {
   );
 });
 
+it("handles dates correctly", () => {
+  // With regular hyphens:
+  expect(proofread(`Uppdatering 2019-01-13:`)).toMatchInlineSnapshot(
+    `"Uppdatering 2019<mis hårt bindestreck>-</mis>01<mis hårt bindestreck>-</mis>13:"`
+  );
+  expect(proofread(`2019-01-13 är ett datum`)).toMatchInlineSnapshot(
+    `"2019<mis hårt bindestreck>-</mis>01<mis hårt bindestreck>-</mis>13 är ett datum"`
+  );
+  // With non-breaking hyphens:
+  expect(proofread(`Uppdatering 2019‑01‑13:`)).toMatchInlineSnapshot(
+    `"Uppdatering 2019‑01‑13:"`
+  );
+});
+
 it("highlights examples correctly", () => {
   expect(highlight("hello&nbsp;world")).toMatchInlineSnapshot(
     `"hello<any>&nbsp;</any>world"`
