@@ -115,9 +115,6 @@ it("proofreads examples correctly", () => {
   expect(proofread(`Counter-Strike`)).toMatchInlineSnapshot(
     `"Counter<mis hårt bindestreck>-</mis>Strike"`
   );
-  expect(proofread(`Silent Wings 3 i 120 mm-utförande`)).toMatchInlineSnapshot(
-    `"Silent Wings<mis hårt mellanslag> </mis>3 i 120<mis hårt mellanslag> </mis>mm-utförande"`
-  );
   expect(
     proofread(
       `på 4 TB. Det som demonstreras är en prototyp som ansluts via USB Type-C och`
@@ -190,6 +187,38 @@ it("handles dates correctly", () => {
   // With non-breaking hyphens:
   expect(proofread(`Uppdatering 2019‑01‑13:`)).toMatchInlineSnapshot(
     `"Uppdatering 2019‑01‑13:"`
+  );
+});
+
+it("handles names correctly", () => {
+  expect(proofread(`Hela 25 undantag`)).toMatchInlineSnapshot(
+    `"Hela 25 undantag"`
+  );
+  expect(
+    proofread(`finns. Hur 25 kan vara mindre än 20 är dock okänt.`)
+  ).toMatchInlineSnapshot(
+    `"finns. Hur 25 kan vara mindre än 20 är dock okänt."`
+  );
+  expect(
+    proofread(`nämligen så: Banka 34 gånger i bordet.`)
+  ).toMatchInlineSnapshot(`"nämligen så: Banka 34 gånger i bordet."`);
+  expect(
+    proofread(`och det är viktigt; Destiny 2 får inte glömmas`)
+  ).toMatchInlineSnapshot(
+    `"och det är viktigt; Destiny<mis hårt mellanslag> </mis>2 får inte glömmas"`
+  );
+  expect(
+    proofread(`Vi vet att Battlefield 1, eller Slagfält 1, är ett spel`)
+  ).toMatchInlineSnapshot(
+    `"Vi vet att Battlefield<mis hårt mellanslag> </mis>1, eller Slagfält<mis hårt mellanslag> </mis>1, är ett spel"`
+  );
+  expect(
+    proofread(`Därför framhäver Asus 144&nbsp;Hz på sin nya skärm`)
+  ).toMatchInlineSnapshot(
+    `"Därför framhäver Asus 144<ver>&nbsp;</ver>Hz på sin nya skärm"`
+  );
+  expect(proofread(`som på Computex 2018 i fjol`)).toMatchInlineSnapshot(
+    `"som på Computex 2018 i fjol"`
   );
 });
 

@@ -32,7 +32,7 @@ export const PATTERNS_MISTAKE_NB_SPACE = [
     /Vega \d+/, // AMD GPUs
     /R\d \d+/, // AMD GPUs
     /DVI(?:[-‑][DI])? DL\b/,
-    /[A-Z][a-z]+ \d{1,3}\b/, // Battlefield 1, Far Cry 5
+    /[^.:] ([A-ZÅÄÖ][a-zåäöé]+ \d{1,3})(?!&nbsp;)\b/, // Battlefield 1, Far Cry 5; but not capitalized words at the start of sentences
     // *** BE CAREFUL! Read above. ***
 ];
 
