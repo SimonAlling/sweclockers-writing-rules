@@ -20,10 +20,9 @@ Without the capture group, it would have been replaced with "8_500_".
 export const PATTERNS_MISTAKE_NB_SPACE = [
     // *** BE CAREFUL! Read above. ***
     /\d(?: \d{3})+/, // numbers
-    / \d+\.\d+/, // USB 3.0, HDMI 2.1 etc
+    /[A-Z][A-Za-z]+ \d+\.\d+/, // USB 3.0, HDMI 2.1, Bluetooth 4.2 etc
     /USB Type/,
     /4K UHD/,
-    /PCI Express/,
     /Core i\d/, // Intel CPUs
     /\d \d{4}/, // AMD CPUs (7 2700X)
     /Geforce (?:G|R)TX\-/, // Geforce GTX-serien
@@ -49,6 +48,7 @@ export const PATTERNS_MISTAKE_NB_SPACE_POST = [
     /(\d+ (?:[nµmcdk]|[KMGTP]i?)?(?:g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|°C|%|st|dBA?))(?:$|[^\wåäöé])/,
     /(\d+ (?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|procent|stycken|decibel))(?:$|[^\wåäöé])/,
 
+    /PCI Express/, // overlaps with the version number check (e.g. " 3.0")
     // *** BE CAREFUL! Read above. ***
 ];
 

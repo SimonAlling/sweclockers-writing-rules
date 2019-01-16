@@ -247,6 +247,23 @@ it("handles leading en dashes correctly", () => {
   );
 });
 
+it("handles version numbers correctly", () => {
+  expect(proofread(`använder Bluetooth 4.0`)).toMatchInlineSnapshot(
+    `"använder Bluetooth<mis hårt mellanslag> </mis>4.0"`
+  );
+  expect(proofread(`USB 3.0`)).toMatchInlineSnapshot(
+    `"USB<mis hårt mellanslag> </mis>3.0"`
+  );
+  expect(
+    proofread(`USB version 3.0 och 3.1 finns nu ute`)
+  ).toMatchInlineSnapshot(`"USB version 3.0 och 3.1 finns nu ute"`);
+  expect(
+    proofread(`utrustad med PCI Express 3.0 kanske`)
+  ).toMatchInlineSnapshot(
+    `"utrustad med PCI<mis hårt mellanslag> </mis>Express<mis hårt mellanslag> </mis>3.0 kanske"`
+  );
+});
+
 it("highlights examples correctly", () => {
   expect(highlight("hello&nbsp;world")).toMatchInlineSnapshot(
     `"hello<any>&nbsp;</any>world"`
