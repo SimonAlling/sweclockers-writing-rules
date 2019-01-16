@@ -222,6 +222,31 @@ it("handles names correctly", () => {
   );
 });
 
+it("handles leading en dashes correctly", () => {
+  // Regular hyphens:
+  expect(
+    proofread(`- <em class="bbEm">Jag har ställt upp med studiehjälp tidigare`)
+  ).toMatchInlineSnapshot(
+    `"<mis tankstreck>-</mis> <em class=\\"bbEm\\">Jag har ställt upp med studiehjälp tidigare"`
+  );
+  expect(
+    proofread(`<em class="bbEm">- Jag har ställt upp med studiehjälp tidigare`)
+  ).toMatchInlineSnapshot(
+    `"<em class=\\"bbEm\\"><mis tankstreck>-</mis> Jag har ställt upp med studiehjälp tidigare"`
+  );
+  // En dashes:
+  expect(
+    proofread(`<em class="bbEm">– Jag har ställt upp med studiehjälp tidigare`)
+  ).toMatchInlineSnapshot(
+    `"<em class=\\"bbEm\\"><ver>–</ver> Jag har ställt upp med studiehjälp tidigare"`
+  );
+  expect(
+    proofread(`– <em class="bbEm">Jag har ställt upp med studiehjälp tidigare`)
+  ).toMatchInlineSnapshot(
+    `"<ver>–</ver> <em class=\\"bbEm\\">Jag har ställt upp med studiehjälp tidigare"`
+  );
+});
+
 it("highlights examples correctly", () => {
   expect(highlight("hello&nbsp;world")).toMatchInlineSnapshot(
     `"hello<any>&nbsp;</any>world"`

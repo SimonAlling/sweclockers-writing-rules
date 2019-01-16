@@ -69,6 +69,7 @@ export const PATTERNS_MISTAKE_NB_HYPHEN = [
 
 export const PATTERNS_MISTAKE_EN_DASH = [
     // *** BE CAREFUL! Read above. ***
+    /(?:^|>)- /, // beginning of quote (talstreck); they are often enclosed in <em> tags
     / - /,
     /* The first group prevents hyphens in dates to be markes as mistakes.
     We have to use a Unicode escape sequence there (\u002D = hyphen) because a
