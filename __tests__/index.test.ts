@@ -199,6 +199,12 @@ it("handles dates correctly", () => {
   );
 });
 
+it("handles general number series correctly", () => {
+  expect(proofread(`11-11-11-31`)).toMatchInlineSnapshot(
+    `"11<mis hårt bindestreck>-</mis>11<mis hårt bindestreck>-</mis>11<mis hårt bindestreck>-</mis>31"`
+  );
+});
+
 it("handles names correctly", () => {
   expect(proofread(`Hela 25 undantag`)).toMatchInlineSnapshot(
     `"Hela 25 undantag"`

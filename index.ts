@@ -64,7 +64,7 @@ export const PATTERNS_MISTAKE_NB_HYPHEN = [
     /DDR\d-\d/, // DDR4-3200, LPDDR3-2133 etc
     /i\d-\d{4}/, // Intel CPUs
     /[A-Z][a-z]+-[A-Z]{1,2}\b/, // Haswell-E, Kaby Lake-X etc
-    /\d{4}-\d{2}-\d{2}/,
+    /\d+-\d+(?:-\d+)+/, // dates, RAM latencies etc
     // *** BE CAREFUL! Read above. ***
 ];
 
