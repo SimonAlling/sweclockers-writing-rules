@@ -237,6 +237,33 @@ it("handles names correctly", () => {
   );
 });
 
+it("handles currencies correctly", () => {
+  expect(proofread(`kostar 40 euro`)).toMatchInlineSnapshot(
+    `"kostar 40<mis hårt mellanslag> </mis>euro"`
+  );
+  expect(proofread(`kostar 40 dollar`)).toMatchInlineSnapshot(
+    `"kostar 40<mis hårt mellanslag> </mis>dollar"`
+  );
+  expect(proofread(`kostar 40 EUR`)).toMatchInlineSnapshot(
+    `"kostar 40<mis hårt mellanslag> </mis>EUR"`
+  );
+  expect(proofread(`kostar 40 USD`)).toMatchInlineSnapshot(
+    `"kostar 40<mis hårt mellanslag> </mis>USD"`
+  );
+  expect(proofread(`kostar 40&nbsp;euro`)).toMatchInlineSnapshot(
+    `"kostar 40<ver>&nbsp;</ver>euro"`
+  );
+  expect(proofread(`kostar 40&nbsp;dollar`)).toMatchInlineSnapshot(
+    `"kostar 40<ver>&nbsp;</ver>dollar"`
+  );
+  expect(proofread(`kostar 40&nbsp;EUR`)).toMatchInlineSnapshot(
+    `"kostar 40<ver>&nbsp;</ver>EUR"`
+  );
+  expect(proofread(`kostar 40&nbsp;USD`)).toMatchInlineSnapshot(
+    `"kostar 40<ver>&nbsp;</ver>USD"`
+  );
+});
+
 it("handles leading en dashes correctly", () => {
   // Regular hyphens:
   expect(
