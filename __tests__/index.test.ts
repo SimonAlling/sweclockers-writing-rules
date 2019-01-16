@@ -61,6 +61,15 @@ it("proofreads examples correctly", () => {
   ).toMatchInlineSnapshot(
     `"Nvidia G<mis hårt bindestreck>-</mis>Sync Ultimate är skärmar med 4K<mis hårt mellanslag> </mis>UHD, 144<mis hårt mellanslag> </mis>Hz och HDR"`
   );
+  expect(proofread(`med V-Sync`)).toMatchInlineSnapshot(
+    `"med V<mis hårt bindestreck>-</mis>Sync"`
+  );
+  expect(proofread(`med V-sync`)).toMatchInlineSnapshot(
+    `"med V<mis hårt bindestreck>-</mis>sync"`
+  );
+  expect(proofread(`med V‑sync`)).toMatchInlineSnapshot(
+    `"med V<ver>‑</ver>sync"`
+  );
   expect(proofread(`den 18/1–20/1`)).toMatchInlineSnapshot(
     `"den 18/1<ver>–</ver>20/1"`
   );

@@ -57,6 +57,7 @@ export const PATTERNS_MISTAKE_NB_HYPHEN = [
     /i\d-\d{4}/, // Intel CPUs
     /Mini-ITX/,
     /G-Sync/,
+    /V-[Ss]ync/,
     /Counter-Strike/,
     /DVI-(?:A|DL?|I)\b/,
     /Type-C\b/, // USB Type-C
