@@ -45,8 +45,8 @@ export const PATTERNS_MISTAKE_NB_SPACE_POST = [
     // Number followed by space, then unit, then something that is not a
     // word character or common Swedish letter:
     // (Capture group because our word boundary substitute matches a space.)
-    /(\d+ (?:[nµmcdk]|[KMGTP]i?)?(?:g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|°C|%|st|dBA?))(?:$|[^\wåäöé])/,
-    /(\d+ (?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|procent|stycken|decibel))(?:$|[^\wåäöé])/,
+    /(\d+ (?:[nµmcdk]|[KMGTP]i?)?(?:s|g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|°C|%|st|dBA?))(?:$|[^\wåäöé])/,
+    /(\d+ (?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:sekund(?:er)?|gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|procent|stycken|decibel))(?:$|[^\wåäöé])/,
 
     /PCI Express/, // overlaps with the version number check (e.g. " 3.0")
     // *** BE CAREFUL! Read above. ***

@@ -264,6 +264,21 @@ it("handles version numbers correctly", () => {
   );
 });
 
+it("handles times correctly", () => {
+  expect(proofread(`16,7 ms`)).toMatchInlineSnapshot(
+    `"16,7<mis hårt mellanslag> </mis>ms"`
+  );
+  expect(proofread(`16,7&nbsp;ms`)).toMatchInlineSnapshot(
+    `"16,7<ver>&nbsp;</ver>ms"`
+  );
+  expect(proofread(`mer än 8,3 millisekunder`)).toMatchInlineSnapshot(
+    `"mer än 8,3<mis hårt mellanslag> </mis>millisekunder"`
+  );
+  expect(proofread(`20 sekunder`)).toMatchInlineSnapshot(
+    `"20<mis hårt mellanslag> </mis>sekunder"`
+  );
+});
+
 it("highlights examples correctly", () => {
   expect(highlight("hello&nbsp;world")).toMatchInlineSnapshot(
     `"hello<any>&nbsp;</any>world"`
