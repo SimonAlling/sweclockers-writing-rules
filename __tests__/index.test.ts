@@ -1,6 +1,6 @@
 import { highlightWith, proofreadWith } from "highlight-mistakes";
 
-import { PATTERN_DOPPELGANGERS, RULES } from "../index";
+import { PATTERN_DOPPELGANGERS, RULES } from "../src/index";
 
 const CLASS_MIS = "mis";
 const CLASS_VER = "ver";

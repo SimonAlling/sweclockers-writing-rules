@@ -14,9 +14,10 @@
         "experimentalDecorators": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
+        "outDir": "dist",
         "preserveConstEnums": true
     },
     "files": [
-        "index.ts"
+        "src/index.ts"
     ]
 }
