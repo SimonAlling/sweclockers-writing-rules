@@ -15,8 +15,8 @@ const NO_INFO = null;
 
 const proofread = proofreadWith({
   rules: RULES,
-  identifiers: { mistake: CLASS_MIS, verified: CLASS_VER },
-  markWith
+  markMistake: markWith(CLASS_MIS),
+  markVerified: markWith(CLASS_VER)
 });
 
 const highlight = highlightWith({
@@ -26,7 +26,7 @@ const highlight = highlightWith({
 
 it("does something right", () => {
   expect(proofread("5&nbsp;GHz eller 4 GHz")).toMatchInlineSnapshot(
-    `"5<ver>&nbsp;</ver>GHz eller 4<mis hårt mellanslag> </mis>GHz"`
+    `"5<ver hårt mellanslag>&nbsp;</ver>GHz eller 4<mis hårt mellanslag> </mis>GHz"`
   );
 });
 
@@ -36,14 +36,14 @@ it("proofreads examples correctly", () => {
       `The Division 2 får systemkrav – RTX 2080 Ti eller Radeon VII för 4K-spelande`
     )
   ).toMatchInlineSnapshot(
-    `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver>–</ver> RTX<mis hårt mellanslag> </mis>2080<mis hårt mellanslag> </mis>Ti eller Radeon VII för 4K-spelande"`
+    `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver tankstreck>–</ver> RTX<mis hårt mellanslag> </mis>2080<mis hårt mellanslag> </mis>Ti eller Radeon VII för 4K-spelande"`
   );
   expect(
     proofread(
       `The Division 2 får systemkrav – RTX 2080&nbsp;Ti eller Radeon VII för 4K-spelande`
     )
   ).toMatchInlineSnapshot(
-    `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver>–</ver> RTX<mis hårt mellanslag> </mis>2080&nbsp;Ti eller Radeon VII för 4K-spelande"`
+    `"The Division<mis hårt mellanslag> </mis>2 får systemkrav <ver tankstreck>–</ver> RTX<mis hårt mellanslag> </mis>2080&nbsp;Ti eller Radeon VII för 4K-spelande"`
   );
   expect(proofread(`144 Hz IPS med Freesync på 27 tum`)).toMatchInlineSnapshot(
     `"144<mis hårt mellanslag> </mis>Hz IPS med Freesync på 27<mis hårt mellanslag> </mis>tum"`
@@ -51,7 +51,7 @@ it("proofreads examples correctly", () => {
   expect(
     proofread(`10-bitars IPS-panel, upplösningen 2 560 × 1 440 pixlar, 144 Hz`)
   ).toMatchInlineSnapshot(
-    `"10-bitars IPS-panel, upplösningen 2<mis hårt mellanslag> </mis>560<mis hårda mellanslag> <ver>×</ver> </mis>1<mis hårt mellanslag> </mis>440 pixlar, 144<mis hårt mellanslag> </mis>Hz"`
+    `"10-bitars IPS-panel, upplösningen 2<mis hårt mellanslag> </mis>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<mis hårt mellanslag> </mis>440 pixlar, 144<mis hårt mellanslag> </mis>Hz"`
   );
   expect(proofread(`cirka 6 700 kronor`)).toMatchInlineSnapshot(
     `"cirka 6<mis hårt mellanslag> </mis>700<mis hårt mellanslag> </mis>kronor"`
@@ -68,10 +68,10 @@ it("proofreads examples correctly", () => {
     `"med V<mis hårt bindestreck>-</mis>sync"`
   );
   expect(proofread(`med V‑sync`)).toMatchInlineSnapshot(
-    `"med V<ver>‑</ver>sync"`
+    `"med V<ver hårt bindestreck>‑</ver>sync"`
   );
   expect(proofread(`den 18/1–20/1`)).toMatchInlineSnapshot(
-    `"den 18/1<ver>–</ver>20/1"`
+    `"den 18/1<ver tankstreck>–</ver>20/1"`
   );
   expect(proofread(`den 18/1-20/1`)).toMatchInlineSnapshot(
     `"den 18/1<mis tankstreck>-</mis>20/1"`
@@ -104,7 +104,7 @@ it("proofreads examples correctly", () => {
       `Intel Core i9-9900K, i7-9700K och i5-9600K – "Coffee Lake Refresh"`
     )
   ).toMatchInlineSnapshot(
-    `"Intel Core<mis hårt mellanslag> </mis>i9<mis hårt bindestreck>-</mis>9900K, i7<mis hårt bindestreck>-</mis>9700K och i5<mis hårt bindestreck>-</mis>9600K <ver>–</ver> \\"Coffee Lake Refresh\\""`
+    `"Intel Core<mis hårt mellanslag> </mis>i9<mis hårt bindestreck>-</mis>9900K, i7<mis hårt bindestreck>-</mis>9700K och i5<mis hårt bindestreck>-</mis>9600K <ver tankstreck>–</ver> \\"Coffee Lake Refresh\\""`
   );
   expect(proofread(`på 14 nanometer`)).toMatchInlineSnapshot(
     `"på 14<mis hårt mellanslag> </mis>nanometer"`
@@ -116,7 +116,7 @@ it("proofreads examples correctly", () => {
     `"vid 4,7<mis hårt mellanslag> </mis>GHz"`
   );
   expect(proofread(`AMD:s toppmodell Ryzen 7 2700X`)).toMatchInlineSnapshot(
-    `"AMD:s toppmodell Ryzen<mis hårt mellanslag> </mis>7 2700X"`
+    `"AMD:s toppmodell Ryzen 7<mis hårt mellanslag> </mis>2700X"`
   );
   expect(proofread(`Mini-ITX-chassin`)).toMatchInlineSnapshot(
     `"Mini<mis hårt bindestreck>-</mis>ITX-chassin"`
@@ -150,22 +150,22 @@ it("proofreads examples correctly", () => {
   expect(
     proofread(`Vi pratar Ryzen 3000-serien med AMD – Zen 2 och 7 nanometer`)
   ).toMatchInlineSnapshot(
-    `"Vi pratar Ryzen<mis hårt mellanslag> </mis>3000-serien med AMD <ver>–</ver> Zen<mis hårt mellanslag> </mis>2 och 7<mis hårt mellanslag> </mis>nanometer"`
+    `"Vi pratar Ryzen<mis hårt mellanslag> </mis>3000-serien med AMD <ver tankstreck>–</ver> Zen<mis hårt mellanslag> </mis>2 och 7<mis hårt mellanslag> </mis>nanometer"`
   );
   expect(proofread(`2 x Ethernet RJ45`)).toMatchInlineSnapshot(
     `"2 <mis gångertecken>x</mis> Ethernet RJ45"`
   );
   expect(proofread(`2 × Ethernet RJ45`)).toMatchInlineSnapshot(
-    `"2 <ver>×</ver> Ethernet RJ45"`
+    `"2<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>Ethernet RJ45"`
   );
   expect(proofread(`2 560 x 1 440`)).toMatchInlineSnapshot(
     `"2<mis hårt mellanslag> </mis>560 <mis gångertecken>x</mis> 1<mis hårt mellanslag> </mis>440"`
   );
   expect(proofread(`2&nbsp;560 × 1&nbsp;440`)).toMatchInlineSnapshot(
-    `"2<ver>&nbsp;</ver>560<mis hårda mellanslag> <ver>×</ver> </mis>1<ver>&nbsp;</ver>440"`
+    `"2<ver hårt mellanslag>&nbsp;</ver>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<ver hårt mellanslag>&nbsp;</ver>440"`
   );
   expect(proofread(`2&nbsp;560&nbsp;×&nbsp;1&nbsp;440`)).toMatchInlineSnapshot(
-    `"2<ver>&nbsp;</ver>560<ver>&nbsp;×&nbsp;</ver>1<ver>&nbsp;</ver>440"`
+    `"2<ver hårt mellanslag>&nbsp;</ver>560<ver hårda mellanslag>&nbsp;×&nbsp;</ver>1<ver hårt mellanslag>&nbsp;</ver>440"`
   );
   expect(
     proofread(`en yta på 32 mm<sup class="bbSup">2</sup>`)
@@ -195,7 +195,7 @@ it("handles dates correctly", () => {
   );
   // With non-breaking hyphens:
   expect(proofread(`Uppdatering 2019‑01‑13:`)).toMatchInlineSnapshot(
-    `"Uppdatering 2019‑01‑13:"`
+    `"Uppdatering 2019<ver hårt bindestreck>‑</ver>01<ver hårt bindestreck>‑</ver>13:"`
   );
 });
 
@@ -230,7 +230,7 @@ it("handles names correctly", () => {
   expect(
     proofread(`Därför framhäver Asus 144&nbsp;Hz på sin nya skärm`)
   ).toMatchInlineSnapshot(
-    `"Därför framhäver Asus 144<ver>&nbsp;</ver>Hz på sin nya skärm"`
+    `"Därför framhäver Asus 144<ver hårt mellanslag>&nbsp;</ver>Hz på sin nya skärm"`
   );
   expect(proofread(`som på Computex 2018 i fjol`)).toMatchInlineSnapshot(
     `"som på Computex 2018 i fjol"`
@@ -251,16 +251,16 @@ it("handles currencies correctly", () => {
     `"kostar 40<mis hårt mellanslag> </mis>USD"`
   );
   expect(proofread(`kostar 40&nbsp;euro`)).toMatchInlineSnapshot(
-    `"kostar 40<ver>&nbsp;</ver>euro"`
+    `"kostar 40<ver hårt mellanslag>&nbsp;</ver>euro"`
   );
   expect(proofread(`kostar 40&nbsp;dollar`)).toMatchInlineSnapshot(
-    `"kostar 40<ver>&nbsp;</ver>dollar"`
+    `"kostar 40<ver hårt mellanslag>&nbsp;</ver>dollar"`
   );
   expect(proofread(`kostar 40&nbsp;EUR`)).toMatchInlineSnapshot(
-    `"kostar 40<ver>&nbsp;</ver>EUR"`
+    `"kostar 40<ver hårt mellanslag>&nbsp;</ver>EUR"`
   );
   expect(proofread(`kostar 40&nbsp;USD`)).toMatchInlineSnapshot(
-    `"kostar 40<ver>&nbsp;</ver>USD"`
+    `"kostar 40<ver hårt mellanslag>&nbsp;</ver>USD"`
   );
 });
 
@@ -280,12 +280,12 @@ it("handles leading en dashes correctly", () => {
   expect(
     proofread(`<em class="bbEm">– Jag har ställt upp med studiehjälp tidigare`)
   ).toMatchInlineSnapshot(
-    `"<em class=\\"bbEm\\"><ver>–</ver> Jag har ställt upp med studiehjälp tidigare"`
+    `"<em class=\\"bbEm\\"><ver tankstreck>–</ver> Jag har ställt upp med studiehjälp tidigare"`
   );
   expect(
     proofread(`– <em class="bbEm">Jag har ställt upp med studiehjälp tidigare`)
   ).toMatchInlineSnapshot(
-    `"<ver>–</ver> <em class=\\"bbEm\\">Jag har ställt upp med studiehjälp tidigare"`
+    `"<ver tankstreck>–</ver> <em class=\\"bbEm\\">Jag har ställt upp med studiehjälp tidigare"`
   );
 });
 
@@ -311,13 +311,28 @@ it("handles times correctly", () => {
     `"16,7<mis hårt mellanslag> </mis>ms"`
   );
   expect(proofread(`16,7&nbsp;ms`)).toMatchInlineSnapshot(
-    `"16,7<ver>&nbsp;</ver>ms"`
+    `"16,7<ver hårt mellanslag>&nbsp;</ver>ms"`
   );
   expect(proofread(`mer än 8,3 millisekunder`)).toMatchInlineSnapshot(
     `"mer än 8,3<mis hårt mellanslag> </mis>millisekunder"`
   );
   expect(proofread(`20 sekunder`)).toMatchInlineSnapshot(
     `"20<mis hårt mellanslag> </mis>sekunder"`
+  );
+});
+
+it("handles resolutions etc correctly", () => {
+  expect(proofread(`2 560 x 1 440`)).toMatchInlineSnapshot(
+    `"2<mis hårt mellanslag> </mis>560 <mis gångertecken>x</mis> 1<mis hårt mellanslag> </mis>440"`
+  );
+  expect(proofread(`2 560 × 1 440`)).toMatchInlineSnapshot(
+    `"2<mis hårt mellanslag> </mis>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<mis hårt mellanslag> </mis>440"`
+  );
+  expect(proofread(`2&nbsp;560 × 1&nbsp;440`)).toMatchInlineSnapshot(
+    `"2<ver hårt mellanslag>&nbsp;</ver>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<ver hårt mellanslag>&nbsp;</ver>440"`
+  );
+  expect(proofread(`2&nbsp;560&nbsp;×&nbsp;1&nbsp;440`)).toMatchInlineSnapshot(
+    `"2<ver hårt mellanslag>&nbsp;</ver>560<ver hårda mellanslag>&nbsp;×&nbsp;</ver>1<ver hårt mellanslag>&nbsp;</ver>440"`
   );
 });
 
@@ -328,6 +343,6 @@ it("highlights examples correctly", () => {
   expect(
     highlight(proofread("hello&nbsp;world och 4 GHz eller 5&nbsp;GHz"))
   ).toMatchInlineSnapshot(
-    `"hello<any>&nbsp;</any>world och 4<mis hårt mellanslag> </mis>GHz eller 5<ver><any>&nbsp;</any></ver>GHz"`
+    `"hello<any>&nbsp;</any>world och 4<mis hårt mellanslag> </mis>GHz eller 5<ver hårt mellanslag><any>&nbsp;</any></ver>GHz"`
   );
 });
