@@ -342,6 +342,12 @@ it("handles times correctly", () => {
   expect(proofread(`20 sekunder`)).toMatchInlineSnapshot(
     `"20<mis hårt mellanslag> </mis>sekunder"`
   );
+  expect(proofread(`fyller SweClockers 20 år`)).toMatchInlineSnapshot(
+    `"fyller SweClockers 20<mis hårt mellanslag> </mis>år"`
+  );
+  expect(proofread(`fyller SweClockers 20&nbsp;år`)).toMatchInlineSnapshot(
+    `"fyller SweClockers 20<ver hårt mellanslag>&nbsp;</ver>år"`
+  );
 });
 
 it("handles resolutions etc correctly", () => {

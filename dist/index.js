@@ -48,6 +48,7 @@ const RULES_NB_SPACE = [
     simpleNBSP(/\d/, /(?=\d{3})/),
     regexNBSP(/\d (?:[nµmcdk]|[KMGTP]i?)?(?:s|g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|USD|EUR|°C|%|st|dBA?)(?=$|[^\wåäöé])/),
     simpleNBSP(/\d+/, /(?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:sekund(?:er)?|gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|dollar|euro|procent|stycken|decibel)(?:$|[^\wåäöé])/),
+    simpleNBSP(/\d+/, /år\b/),
     matchNBSP(/[^:.] [A-ZÅÄÖ][a-zåäöé]+/, / (?=\d)/, /\d{1,3}(?=[.,;: ])/),
     simpleNBSP(/4K/, /UHD/),
     simpleNBSP(/USB/, /Type/),

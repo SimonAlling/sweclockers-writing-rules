@@ -70,6 +70,7 @@ const RULES_NB_SPACE: ReadonlyArray<Rule> = [
     // common Swedish letter:
     regexNBSP(/\d (?:[nµmcdk]|[KMGTP]i?)?(?:s|g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|USD|EUR|°C|%|st|dBA?)(?=$|[^\wåäöé])/),
     simpleNBSP(/\d+/, /(?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:sekund(?:er)?|gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|dollar|euro|procent|stycken|decibel)(?:$|[^\wåäöé])/),
+    simpleNBSP(/\d+/, /år\b/),
     matchNBSP(/[^:.] [A-ZÅÄÖ][a-zåäöé]+/, / (?=\d)/, /\d{1,3}(?=[.,;: ])/), // Battlefield 1, Far Cry 5; but not capitalized words at the start of sentences
     simpleNBSP(/4K/, /UHD/),
     simpleNBSP(/USB/, /Type/),
