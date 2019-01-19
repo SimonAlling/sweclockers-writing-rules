@@ -97,12 +97,13 @@ const RULES_NB_HYPHEN: ReadonlyArray<Rule> = [
     simpleNBH(/DDR\d/, /\d/), // DDR4-3200, LPDDR3-2133 etc
     simpleNBH(/i\d/, /\d{4}/), // Intel CPUs
     simpleNBH(/[A-Z][a-z]+/, /[A-Z]{1,2}\b/), // Haswell-E, Kaby Lake-X etc
-    matchNBH(/\d+/, /\d+(?:-\d+)+/, null), // dates, RAM latencies etc
+    matchNBH(/\d+/, /-\d+(?:-\d+)+/, null), // dates, RAM latencies etc
 ];
 
 const RULES_EN_DASH: ReadonlyArray<Rule> = [
     simpleEND(/(?:^|>)/, / /), // beginning of quote (talstreck); they are often enclosed in <em> tags
-    simpleEND(/(?:^|[^\d-])\d{1,3}(?:,\d+)?/, /\d+(?:,\d+)?\b/), // intervals, e.g. 2-5; 1,5-2,0)
+    simpleEND(/(?:^|[^\d-])\d{1,3}(?:,\d+)?/, /\d+(?:,\d+)?(?=[^\d-]|$)/), // intervals, e.g. 2-5; 1,5-2,0)
+    simpleEND(/(?:^|[^\d-])\d{4}/, /\d{4}(?=[^\d-]|$)/), // intervals of years, e.g. 1955–2011
     simpleEND(/ /, / /),
 ];
 

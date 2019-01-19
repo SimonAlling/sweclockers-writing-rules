@@ -70,11 +70,12 @@ const RULES_NB_HYPHEN = [
     simpleNBH(/DDR\d/, /\d/),
     simpleNBH(/i\d/, /\d{4}/),
     simpleNBH(/[A-Z][a-z]+/, /[A-Z]{1,2}\b/),
-    matchNBH(/\d+/, /\d+(?:-\d+)+/, null),
+    matchNBH(/\d+/, /-\d+(?:-\d+)+/, null),
 ];
 const RULES_EN_DASH = [
     simpleEND(/(?:^|>)/, / /),
-    simpleEND(/(?:^|[^\d-])\d{1,3}(?:,\d+)?/, /\d+(?:,\d+)?\b/),
+    simpleEND(/(?:^|[^\d-])\d{1,3}(?:,\d+)?/, /\d+(?:,\d+)?(?=[^\d-]|$)/),
+    simpleEND(/(?:^|[^\d-])\d{4}/, /\d{4}(?=[^\d-]|$)/),
     simpleEND(/ /, / /),
 ];
 export const PATTERNS_MISTAKE_TIMES = [

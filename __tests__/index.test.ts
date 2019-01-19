@@ -185,6 +185,29 @@ it("proofreads examples correctly", () => {
   );
 });
 
+it("handles ranges correctly", () => {
+  // With hyphens:
+  expect(proofread(`till 4-5 GHz`)).toMatchInlineSnapshot(
+    `"till 4<mis tankstreck>-</mis>5<mis hårt mellanslag> </mis>GHz"`
+  );
+  expect(proofread(`Steve Jobs (1955-2011)`)).toMatchInlineSnapshot(
+    `"Steve Jobs (1955<mis tankstreck>-</mis>2011)"`
+  );
+  expect(proofread(`1939-1945`)).toMatchInlineSnapshot(
+    `"1939<mis tankstreck>-</mis>1945"`
+  );
+  // With en dashes:
+  expect(proofread(`till 4–5 GHz`)).toMatchInlineSnapshot(
+    `"till 4<ver tankstreck>–</ver>5<mis hårt mellanslag> </mis>GHz"`
+  );
+  expect(proofread(`Steve Jobs (1955–2011)`)).toMatchInlineSnapshot(
+    `"Steve Jobs (1955<ver tankstreck>–</ver>2011)"`
+  );
+  expect(proofread(`1939–1945`)).toMatchInlineSnapshot(
+    `"1939<ver tankstreck>–</ver>1945"`
+  );
+});
+
 it("handles dates correctly", () => {
   // With regular hyphens:
   expect(proofread(`Uppdatering 2019-01-13:`)).toMatchInlineSnapshot(
