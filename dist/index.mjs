@@ -1,7 +1,7 @@
 import { literalRule, matchRule, regexRule, simpleRule, } from "highlight-mistakes";
 const DESC_NBSP = {
     bad: " ",
-    good: "&nbsp;",
+    good: "\u00A0",
     info: "hårt mellanslag",
 };
 const DESC_NBH = {
@@ -39,7 +39,7 @@ export const PATTERNS_MISTAKE_NB_SPACE = [
     /Vega \d+/,
     /R\d \d+/,
     /DVI(?:[-‑][DI])? DL\b/,
-    /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!&nbsp;)\b/,
+    /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!\u00A0)\b/,
 ];
 const RULES_NB_SPACE = [
     simpleNBSP(/[A-Z][A-Za-z]+/, /\d+\.\d+/),
@@ -85,12 +85,12 @@ export const PATTERNS_MISTAKE_TIMES = [
 export const RULES_TIMES = [
     simpleRule({ good: "×", bad: "x", info: "gångertecken" })(/ /, / /),
 ];
-export const PATTERN_DOPPELGANGERS = /&nbsp;|‑|–|×/g;
+export const PATTERN_DOPPELGANGERS = /\u00A0|‑|–|×/g;
 export const RULES = ([]
     .concat([
     literalRule({
         bad: " × ",
-        good: "&nbsp;×&nbsp;",
+        good: "\u00A0×\u00A0",
         info: "hårda mellanslag",
     })(null, null),
 ])

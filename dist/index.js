@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const highlight_mistakes_1 = require("highlight-mistakes");
 const DESC_NBSP = {
     bad: " ",
-    good: "&nbsp;",
+    good: "\u00A0",
     info: "hårt mellanslag",
 };
 const DESC_NBH = {
@@ -41,7 +41,7 @@ exports.PATTERNS_MISTAKE_NB_SPACE = [
     /Vega \d+/,
     /R\d \d+/,
     /DVI(?:[-‑][DI])? DL\b/,
-    /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!&nbsp;)\b/,
+    /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!\u00A0)\b/,
 ];
 const RULES_NB_SPACE = [
     simpleNBSP(/[A-Z][A-Za-z]+/, /\d+\.\d+/),
@@ -87,12 +87,12 @@ exports.PATTERNS_MISTAKE_TIMES = [
 exports.RULES_TIMES = [
     highlight_mistakes_1.simpleRule({ good: "×", bad: "x", info: "gångertecken" })(/ /, / /),
 ];
-exports.PATTERN_DOPPELGANGERS = /&nbsp;|‑|–|×/g;
+exports.PATTERN_DOPPELGANGERS = /\u00A0|‑|–|×/g;
 exports.RULES = ([]
     .concat([
     highlight_mistakes_1.literalRule({
         bad: " × ",
-        good: "&nbsp;×&nbsp;",
+        good: "\u00A0×\u00A0",
         info: "hårda mellanslag",
     })(null, null),
 ])

@@ -1,3 +1,5 @@
+// NB: \u00A0 is NBSP.
+
 import {
     Rule,
     literalRule,
@@ -8,7 +10,7 @@ import {
 
 const DESC_NBSP = {
     bad: " ",
-    good: "&nbsp;",
+    good: "\u00A0", // NBSP
     info: "hårt mellanslag",
 };
 
@@ -60,7 +62,7 @@ export const PATTERNS_MISTAKE_NB_SPACE = [
     /Vega \d+/, // AMD GPUs
     /R\d \d+/, // AMD GPUs
     /DVI(?:[-‑][DI])? DL\b/,
-    /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!&nbsp;)\b/, // Battlefield 1, Far Cry 5; but not capitalized words at the start of sentences
+    /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!\u00A0)\b/, // Battlefield 1, Far Cry 5; but not capitalized words at the start of sentences
 ];
 
 const RULES_NB_SPACE: ReadonlyArray<Rule> = [
@@ -117,13 +119,13 @@ export const RULES_TIMES: ReadonlyArray<Rule> = [
 ];
 
 // Non-breaking space, non-breaking hyphen, en dash:
-export const PATTERN_DOPPELGANGERS = /&nbsp;|‑|–|×/g;
+export const PATTERN_DOPPELGANGERS = /\u00A0|‑|–|×/g; // \u00A0 = NBSP
 
 export const RULES: ReadonlyArray<Rule> = (([] as ReadonlyArray<Rule>)
     .concat([
         literalRule({
             bad: " × ",
-            good: "&nbsp;×&nbsp;",
+            good: "\u00A0×\u00A0",
             info: "hårda mellanslag",
         })(null, null),
     ])
