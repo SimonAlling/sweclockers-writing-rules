@@ -1,7 +1,6 @@
 {
-  "name": "sweclockers-writing-rules",
+  "name": "@alling/sweclockers-writing-rules",
   "version": "3.0.0",
-  "private": true,
   "description": "Used in Better SweClockers.",
   "keywords": [
     "SweClockers",
