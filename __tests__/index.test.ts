@@ -285,26 +285,18 @@ it("handles currencies correctly", () => {
 
 it("handles leading en dashes correctly", () => {
   // Regular hyphens:
+  expect(proofread(`- `)).toMatchInlineSnapshot(`"<mis tankstreck>-</mis> "`);
   expect(
-    proofread(`- <em class="bbEm">Jag har ställt upp med studiehjälp tidigare`)
+    proofread(`- Jag har ställt upp med studiehjälp tidigare`)
   ).toMatchInlineSnapshot(
-    `"<mis tankstreck>-</mis> <em class=\\"bbEm\\">Jag har ställt upp med studiehjälp tidigare"`
-  );
-  expect(
-    proofread(`<em class="bbEm">- Jag har ställt upp med studiehjälp tidigare`)
-  ).toMatchInlineSnapshot(
-    `"<em class=\\"bbEm\\"><mis tankstreck>-</mis> Jag har ställt upp med studiehjälp tidigare"`
+    `"<mis tankstreck>-</mis> Jag har ställt upp med studiehjälp tidigare"`
   );
   // En dashes:
+  expect(proofread(`– `)).toMatchInlineSnapshot(`"<ver tankstreck>–</ver> "`);
   expect(
-    proofread(`<em class="bbEm">– Jag har ställt upp med studiehjälp tidigare`)
+    proofread(`– Jag har ställt upp med studiehjälp tidigare`)
   ).toMatchInlineSnapshot(
-    `"<em class=\\"bbEm\\"><ver tankstreck>–</ver> Jag har ställt upp med studiehjälp tidigare"`
-  );
-  expect(
-    proofread(`– <em class="bbEm">Jag har ställt upp med studiehjälp tidigare`)
-  ).toMatchInlineSnapshot(
-    `"<ver tankstreck>–</ver> <em class=\\"bbEm\\">Jag har ställt upp med studiehjälp tidigare"`
+    `"<ver tankstreck>–</ver> Jag har ställt upp med studiehjälp tidigare"`
   );
 });
 

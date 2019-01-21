@@ -104,7 +104,7 @@ const RULES_NB_HYPHEN: ReadonlyArray<Rule> = [
 ];
 
 const RULES_EN_DASH: ReadonlyArray<Rule> = [
-    simpleEND(/(?:^|>)/, / /), // beginning of quote (talstreck); they are often enclosed in <em> tags
+    simpleEND(/^/, / /), // beginning of quote (talstreck)
     simpleEND(/(?:^|[^\d-])\d{1,3}(?:,\d+)?/, /\d+(?:,\d+)?(?=[^\d-]|$)/), // intervals, e.g. 2-5; 1,5-2,0)
     simpleEND(/(?:^|[^\d-])\d{4}/, /\d{4}(?=[^\d-]|$)/), // intervals of years, e.g. 1955–2011
     simpleEND(/ /, / /),
