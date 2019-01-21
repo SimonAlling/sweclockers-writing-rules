@@ -121,6 +121,8 @@ export const RULES_TIMES: ReadonlyArray<Rule> = [
 // Non-breaking space, non-breaking hyphen, en dash:
 export const PATTERN_DOPPELGANGERS = /\u00A0|‑|–|×/g; // \u00A0 = NBSP
 
+const GIBBERISH = "sahdufhaweafdafda";
+
 export const RULES: ReadonlyArray<Rule> = (([] as ReadonlyArray<Rule>)
     .concat([
         literalRule({
@@ -134,15 +136,29 @@ export const RULES: ReadonlyArray<Rule> = (([] as ReadonlyArray<Rule>)
     .concat(RULES_EN_DASH)
     .concat(RULES_TIMES)
     .concat([
+        // We also want to highlight good superscript:
         literalRule({
-            bad: `<sup class="bbSup">2</sup>`,
+            bad: GIBBERISH,
             good: "²",
-            info: "tecknet ² istället för en upphöjd tvåa",
+            info: null,
         })(null, null),
         literalRule({
-            bad: `<sup class="bbSup">3</sup>`,
+            bad: GIBBERISH,
             good: "³",
-            info: "tecknet ³ istället för en upphöjd trea",
+            info: null,
         })(null, null),
     ])
 );
+
+export const RULES_SUP: ReadonlyArray<Rule> = [
+    simpleRule({
+        bad: `2`,
+        good: GIBBERISH,
+        info: "tecknet ² istället för en upphöjd tvåa",
+    })(/^/, /$/),
+    simpleRule({
+        bad: `3`,
+        good: GIBBERISH,
+        info: "tecknet ³ istället för en upphöjd trea",
+    })(/^/, /$/),
+];

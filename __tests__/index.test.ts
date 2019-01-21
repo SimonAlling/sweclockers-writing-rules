@@ -1,6 +1,6 @@
 import { highlightWith, proofreadWith } from "highlight-mistakes";
 
-import { PATTERN_DOPPELGANGERS, RULES } from "../src/index";
+import { PATTERN_DOPPELGANGERS, RULES, RULES_SUP } from "../src/index";
 
 const CLASS_MIS = "mis";
 const CLASS_VER = "ver";
@@ -12,6 +12,12 @@ function markWith(id: string): (info: string | null) => (s: string) => string {
 }
 
 const NO_INFO = null;
+
+const proofreadSup = proofreadWith({
+  rules: RULES_SUP,
+  markMistake: markWith(CLASS_MIS),
+  markVerified: markWith(CLASS_VER)
+});
 
 const proofread = proofreadWith({
   rules: RULES,
@@ -166,16 +172,6 @@ it("proofreads examples correctly", () => {
   );
   expect(proofread(`2\u00A0560\u00A0×\u00A01\u00A0440`)).toMatchInlineSnapshot(
     `"2<ver hårt mellanslag>\u00A0</ver>560<ver hårda mellanslag>\u00A0×\u00A0</ver>1<ver hårt mellanslag>\u00A0</ver>440"`
-  );
-  expect(
-    proofread(`en yta på 32 mm<sup class="bbSup">2</sup>`)
-  ).toMatchInlineSnapshot(
-    `"en yta på 32<mis hårt mellanslag> </mis>mm<mis tecknet ² istället för en upphöjd tvåa><sup class=\\"bbSup\\">2</sup></mis>"`
-  );
-  expect(
-    proofread(`en volym på 5 m<sup class="bbSup">3</sup>`)
-  ).toMatchInlineSnapshot(
-    `"en volym på 5<mis hårt mellanslag> </mis>m<mis tecknet ³ istället för en upphöjd trea><sup class=\\"bbSup\\">3</sup></mis>"`
   );
   expect(proofread(`med PCI Express-anslutning`)).toMatchInlineSnapshot(
     `"med PCI<mis hårt mellanslag> </mis>Express-anslutning"`
@@ -362,6 +358,20 @@ it("handles resolutions etc correctly", () => {
   );
   expect(proofread(`2\u00A0560\u00A0×\u00A01\u00A0440`)).toMatchInlineSnapshot(
     `"2<ver hårt mellanslag>\u00A0</ver>560<ver hårda mellanslag>\u00A0×\u00A0</ver>1<ver hårt mellanslag>\u00A0</ver>440"`
+  );
+});
+
+it("handles superscript correctly", () => {
+  expect(proofreadSup(`2`)).toMatchInlineSnapshot(
+    `"<mis tecknet ² istället för en upphöjd tvåa>2</mis>"`
+  );
+  expect(proofreadSup(`3`)).toMatchInlineSnapshot(
+    `"<mis tecknet ³ istället för en upphöjd trea>3</mis>"`
+  );
+  expect(proofreadSup(` 2`)).toMatchInlineSnapshot(`" 2"`);
+  expect(proofreadSup(` 3`)).toMatchInlineSnapshot(`" 3"`);
+  expect(proofread(`500\u00A0mm² eller mm³`)).toMatchInlineSnapshot(
+    `"500<ver hårt mellanslag> </ver>mm<ver>²</ver> eller mm<ver>³</ver>"`
   );
 });
 
