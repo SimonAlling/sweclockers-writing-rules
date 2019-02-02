@@ -93,8 +93,6 @@ const RULES_NB_SPACE: ReadonlyArray<Rule> = [
     simpleNBSP(/Vega/, /\d+/), // AMD GPUs
     simpleNBSP(/R\d/, /\d+/), // AMD GPUs
     simpleNBSP(/DVI(?:[-‑][DI])?/, /DL/), // -‑ = hyphen and non-breaking hyphen
-    // simpleNBSP(/\d/, /×/),
-    // simpleNBSP(/×/, /\d/),
 ];
 
 const RULES_NB_HYPHEN: ReadonlyArray<Rule> = [
