@@ -65,17 +65,25 @@ export const PATTERNS_MISTAKE_NB_SPACE = [
     /[^.:]\u0020[A-ZÅÄÖ][a-zåäöé]+ \d{1,3}(?!\u00A0)\b/, // Battlefield 1, Far Cry 5; but not capitalized words at the start of sentences
 ];
 
+/*
+"lanseringen av Windows_7 år 2009" (with _ = NBSP) is tricky: We should not
+expect an NBSP in "7 år" unless it actually means "7 år", so when looking for
+numbers, we have to look for the beginning of the string or something that is
+not an NBSP.
+*/
+const NUMBER = /(?:^|[^\u00A0])\d(?:\u00A0\d{3})*(?:,\d+)?/;
+
 const RULES_NB_SPACE: ReadonlyArray<Rule> = [
     simpleNBSP(/[A-Z][A-Za-z]+/, /\d+\.\d+/), // USB 3.0, HDMI 2.1, Bluetooth 4.2 etc
     simpleNBSP(/\d/, /(?=\d{3})/),
     // Number followed by space, then unit, then something that is not a word character or
     // common Swedish letter:
-    regexNBSP(/\d (?:[nµmcdk]|[KMGTP]i?)?(?:s|g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|USD|EUR|°C|%|st|dBA?)(?=$|[^\wåäöé])/),
-    simpleNBSP(/\d+/, /(?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:sekund(?:er)?|gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|dollar|euro|procent|stycken|decibel)(?:$|[^\wåäöé])/),
-    simpleNBSP(/\d+/, /år\b/),
+    simpleNBSP(NUMBER, /(?:[nµmcdk]|[KMGTP]i?)?(?:s|g|m|Hz|b|bit|B|fps|FPS|V|W|Wh|kr|USD|EUR|°C|%|st|dBA?)(?=$|[^\wåäöé])/),
+    simpleNBSP(NUMBER, /(?:nano|mikro|milli|centi|deci|hekto|kilo|mega|giga|tera|peta)?(?:sekund(?:er)?|gram|meter|hertz|bit|byte|tum|bilder|volt|watt|wattimmar|kronor|dollar|euro|procent|stycken|decibel|år)(?:$|[^\wåäöé])/),
     matchNBSP(/[^:.] [A-ZÅÄÖ][a-zåäöé]+/, / (?=\d)/, /\d{1,3}(?=[.,;: ])/), // Battlefield 1, Far Cry 5; but not capitalized words at the start of sentences
     simpleNBSP(/4K/, /UHD/),
     simpleNBSP(/USB/, /Type/),
+    simpleNBSP(/Windows/, /95|98|ME|2000|XP|Vista|7|8(?:\.1)?|10/),
     simpleNBSP(/PCI/, /Express/),
     simpleNBSP(/Core/, /i\d/), // Intel CPUs
     simpleNBSP(/\d/, /\d{4}/), // AMD CPUs (7 2700X)

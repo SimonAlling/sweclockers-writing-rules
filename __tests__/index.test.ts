@@ -367,6 +367,19 @@ it("handles superscript correctly", () => {
   );
 });
 
+it("handles fake quantities correctly", () => {
+  expect(
+    proofread(`Vid lanseringen av Windows\u00A07 år 2009 hade Windows Vista`)
+  ).toMatchInlineSnapshot(
+    `"Vid lanseringen av Windows<ver hårt mellanslag> </ver>7 år 2009 hade Windows<mis hårt mellanslag> </mis>Vista"`
+  );
+  expect(
+    proofread(`Vid lanseringen av Windows 7 år 2009 hade Windows Vista`)
+  ).toMatchInlineSnapshot(
+    `"Vid lanseringen av Windows<mis hårt mellanslag> </mis>7<mis hårt mellanslag> </mis>år 2009 hade Windows<mis hårt mellanslag> </mis>Vista"`
+  );
+});
+
 it("highlights examples correctly", () => {
   expect(highlight("hello\u00A0world")).toMatchInlineSnapshot(
     `"hello<any>\u00A0</any>world"`
