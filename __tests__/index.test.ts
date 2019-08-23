@@ -171,7 +171,7 @@ it("proofreads examples correctly", () => {
     `"2<ver hårt mellanslag>\u00A0</ver>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<ver hårt mellanslag>\u00A0</ver>440"`
   );
   expect(proofread(`2\u00A0560\u00A0×\u00A01\u00A0440`)).toMatchInlineSnapshot(
-    `"2<ver hårt mellanslag>\u00A0</ver>560<ver hårda mellanslag>\u00A0×\u00A0</ver>1<ver hårt mellanslag>\u00A0</ver>440"`
+    `"2<ver hårt mellanslag>\u00A0</ver>560<ver hårda mellanslag>\u00A0<ver gångertecken>×</ver>\u00A0</ver>1<ver hårt mellanslag>\u00A0</ver>440"`
   );
   expect(proofread(`med PCI Express-anslutning`)).toMatchInlineSnapshot(
     `"med PCI<mis hårt mellanslag> </mis>Express-anslutning"`
@@ -345,11 +345,14 @@ it("handles resolutions etc correctly", () => {
   expect(proofread(`2 560 × 1 440`)).toMatchInlineSnapshot(
     `"2<mis hårt mellanslag> </mis>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<mis hårt mellanslag> </mis>440"`
   );
+  expect(proofread(`2\u00A0560\u00A0x\u00A01\u00A0440`)).toMatchInlineSnapshot(
+    `"2<ver hårt mellanslag> </ver>560 <mis gångertecken>x</mis> 1<ver hårt mellanslag> </ver>440"`
+  );
   expect(proofread(`2\u00A0560 × 1\u00A0440`)).toMatchInlineSnapshot(
     `"2<ver hårt mellanslag>\u00A0</ver>560<mis hårda mellanslag> <ver gångertecken>×</ver> </mis>1<ver hårt mellanslag>\u00A0</ver>440"`
   );
   expect(proofread(`2\u00A0560\u00A0×\u00A01\u00A0440`)).toMatchInlineSnapshot(
-    `"2<ver hårt mellanslag>\u00A0</ver>560<ver hårda mellanslag>\u00A0×\u00A0</ver>1<ver hårt mellanslag>\u00A0</ver>440"`
+    `"2<ver hårt mellanslag>\u00A0</ver>560<ver hårda mellanslag>\u00A0<ver gångertecken>×</ver>\u00A0</ver>1<ver hårt mellanslag>\u00A0</ver>440"`
   );
 });
 

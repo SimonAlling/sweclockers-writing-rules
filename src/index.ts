@@ -122,6 +122,7 @@ export const PATTERNS_MISTAKE_TIMES = [
 
 export const RULES_TIMES: ReadonlyArray<Rule> = [
     simpleRule({ good: "×", bad: "x", info: "gångertecken" })(/ /, / /),
+    simpleRule({ good: "×", bad: "x", info: "gångertecken" })(/\u00A0/, /\u00A0/),
 ];
 
 // Non-breaking space, non-breaking hyphen, en dash:
